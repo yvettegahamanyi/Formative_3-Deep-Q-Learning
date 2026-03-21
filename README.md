@@ -19,10 +19,19 @@ This project implements a Deep Q-Network (DQN) agent trained on the **Private Ey
 ## Project Structure
 
 ```
-├── train.py              # Training script (baseline configuration)
-├── play.py               # Evaluation script (visualize agent gameplay)
-├── baseline_notebook.ipynb  # Shared baseline notebook with experiment framework
-└── README.md             # This file
+├── train.py                  # Baseline training (saves dqn_model.zip)
+├── play.py                   # Load a model and render gameplay
+├── dqn_utils.py              # Shared env + evaluation helpers
+├── Mariam/
+│   ├── experiments.py        # 10 experiments + results + best model
+│   └── models/               # saved experiment models
+├── Yvette/
+│   ├── experiments.py
+│   └── models/
+├── Dennis/
+│   ├── experiments.py
+│   └── models/
+└── README.md                 # This file
 ```
 
 ## Scripts Description
@@ -47,16 +56,13 @@ python play.py
 
 **Output**: Real-time game rendering + performance statistics
 
-### baseline_notebook.ipynb
+### Member experiments (10 per member)
 
-Shared Jupyter notebook containing:
+Each member runs **10 different hyperparameter combinations** and records results to a CSV inside their folder. Each script also copies their best experiment model to a single “best model” file for easy comparison.
 
-- Environment setup and verification
-- Baseline DQN configuration
-- Training framework for hyperparameter experiments
-- Experiment tracking template for all members
-- Results aggregation and visualization
-- Presentation preparation guide
+- `Mariam/experiments.py` → `Mariam/results_mariam.csv`, `Mariam/best_mariam_model.zip`
+- `Yvette/experiments.py` → `Yvette/results_yvette.csv`, `Yvette/best_yvette_model.zip`
+- `Dennis/experiments.py` → `Dennis/results_dennis.csv`, `Dennis/best_dennis_model.zip`
 
 ## Hyperparameter Tuning Results
 
@@ -73,8 +79,8 @@ Each member conducted 10 experiments varying:
 
 ### Results Table: All 30 Experiments
 
-| Member                 | Exp# | Learning Rate | Gamma | Batch Size | Epsilon Final | Avg Reward | Max Reward | Observed Behavior |
-| ---------------------- | ---- | ------------- | ----- | ---------- | ------------- | ---------- | ---------- | ----------------- |
+| Member                 | Exp# | lr | gamma | batch | epsilon_start | epsilon_end | epsilon_decay | Avg Reward | Max Reward | Avg Ep Len | Observed Behavior |
+| ---------------------- | ---- | -- | ----- | ----- | ------------- | ----------- | ------------- | ---------- | ---------- | ---------- | ----------------- |
 | **Yvette Gahamanyi**   | 1    |               |       |            |               |            |            |                   |
 |                        | 2    |               |       |            |               |            |            |                   |
 |                        | 3    |               |       |            |               |            |            |                   |
@@ -145,6 +151,34 @@ Each member conducted 10 experiments varying:
 
 ```bash
 pip install stable-baselines3 gymnasium ale-py matplotlib pandas numpy
+```
+
+## How to run (commands)
+
+### Baseline training (saves `dqn_model.zip`)
+
+```bash
+python train.py
+```
+
+Optional CNN vs MLP comparison:
+
+```bash
+python train.py --compare --timesteps 100000
+```
+
+### Member experiments (each runs 10 experiments)
+
+```bash
+python Mariam/experiments.py
+python Yvette/experiments.py
+python Dennis/experiments.py
+```
+
+### Play / record gameplay (loads `dqn_model.zip` by default)
+
+```bash
+python play.py
 ```
 
 ## Work Distribution
