@@ -1,4 +1,4 @@
-# Formative 3: Deep Q-Learning (DQN) - Private Eye Atari
+# Formative 3: Deep Q-Learning (DQN) - Pong
 
 ## Team Members:
 
@@ -8,13 +8,13 @@
 
 ## Project Overview
 
-This project implements a Deep Q-Network (DQN) agent trained on the **Private Eye** Atari environment using Stable Baselines3 and Gymnasium. Each group member conducts 10 hyperparameter tuning experiments to optimize agent performance.
+This project implements a Deep Q-Network (DQN) agent trained on the **Pong** Atari environment using Stable Baselines3 and Gymnasium. Each group member conducts 10 hyperparameter tuning experiments to optimize agent performance.
 
 ### Environment
 
-- **Game**: PrivateEye-v5 (ALE/PrivateEye-v5)
+- **Game**: Pong-v5 (ALE/PrivateEye-v5)
 - **Agent Type**: DQN with CNNPolicy
-- **Objective**: Navigate maze, avoid obstacles, collect items
+- **Objective**: Shoot ball back
 
 ## Project Structure
 
@@ -38,7 +38,7 @@ This project implements a Deep Q-Network (DQN) agent trained on the **Private Ey
 
 ### train.py
 
-Trains a DQN agent on PrivateEye environment with baseline hyperparameters:
+Trains a DQN agent on Pong environment with baseline hyperparameters:
 
 ```bash
 python train.py
@@ -226,7 +226,7 @@ The assignment mentions **epsilon_start, epsilon_end, epsilon_decay**. In Stable
 
 ## Policy Architecture Decision: MLP vs CNN
 
-### CNNPolicy (Convolutional Neural Network) ✅ **RECOMMENDED**
+### CNNPolicy (Convolutional Neural Network) **RECOMMENDED**
 
 - **Use for**: Image-based Atari games like PrivateEye
 - **Advantage**: Learns spatial features (edges, objects, patterns)
