@@ -1,0 +1,4 @@
+Member,Exp_Num,Experiment,lr,gamma,batch_size,epsilon_start,epsilon_end,epsilon_decay,buffer_size,Avg_Reward,Max_Reward,Avg_Ep_Len,Status
+Mariam Awini Issah,1,Exp1: Lower LR + Smaller Batch,5e-05,0.99,24,1.0,0.01,0.1,30000,-3.0,-3.0,25,✓ Success
+Mariam Awini Issah,2,Exp2: Lower Gamma + Smaller Buffer,0.0001,0.95,32,1.0,0.01,0.1,30000,-3.0,-3.0,25,✓ Success
+Mariam Awini Issah,3,Exp3: Combine (Lower LR + Smaller Batch + Lower Gamma + Smaller Buffer),5e-05,0.95,24,1.0,0.01,0.1,30000,-3.0,-3.0,25,✓ Success

@@ -10,7 +10,7 @@ gym.register_envs(ale_py)
 
 
 def play_private_eye(
-    model_path: str = "best_model",
+    model_path: str = "yvette_best_model",
     num_episodes: int = 5,
     render: bool = True,
     full_action_space_mode: str = "auto",
@@ -113,7 +113,7 @@ def play_private_eye(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Play a trained DQN model on Pong (Greedy).")
-    parser.add_argument("--model", type=str, default="dqn_model", help="Model name without .zip (e.g. dqn_model, Mariam/best_mariam_model)")
+    parser.add_argument("--model", type=str, default="yvette_best_model", help="Model name without .zip (e.g. yvette_best_model, Mariam/best_mariam_model)")
     parser.add_argument("--episodes", type=int, default=5, help="Number of episodes to play")
     parser.add_argument("--no-render", action="store_true", help="Disable env.render() / GUI")
     parser.add_argument(

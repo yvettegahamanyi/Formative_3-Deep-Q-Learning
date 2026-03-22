@@ -12,7 +12,7 @@ This project implements a Deep Q-Network (DQN) agent trained on the **Pong** Ata
 
 ### Environment
 
-- **Game**: Pong-v5 (ALE/PrivateEye-v5)
+- **Game**: Pong-v5 (ALE/Pong-v5)
 - **Agent Type**: DQN with CNNPolicy
 - **Objective**: Shoot ball back
 
@@ -77,39 +77,42 @@ Each member conducted 10 experiments varying:
 - **Target Update Interval**: [500, 1000, 2000, 5000]
 - **Buffer Size**: [30000, 50000, 100000]
 
-### Results Table: All 30 Experiments
+### Results Table: All 33 Experiments
 
-| Member                 | Exp# | lr | gamma | batch | epsilon_start | epsilon_end | epsilon_decay | Avg Reward | Max Reward | Avg Ep Len | Observed Behavior |
-| ---------------------- | ---- | -- | ----- | ----- | ------------- | ----------- | ------------- | ---------- | ---------- | ---------- | ----------------- |
-| **Yvette Gahamanyi**   | 1    |               |       |            |               |            |            |                   |
-|                        | 2    |               |       |            |               |            |            |                   |
-|                        | 3    |               |       |            |               |            |            |                   |
-|                        | 4    |               |       |            |               |            |            |                   |
-|                        | 5    |               |       |            |               |            |            |                   |
-|                        | 6    |               |       |            |               |            |            |                   |
-|                        | 7    |               |       |            |               |            |            |                   |
-|                        | 8    |               |       |            |               |            |            |                   |
-|                        | 9    |               |       |            |               |            |            |                   |
-|                        | 10   |               |       |            |               |            |            |                   |
-| **Mariam Awini Issah** | 1    |               |       |            |               |            |            |                   |
-|                        | 2    |               |       |            |               |            |            |                   |
-|                        | 3    |               |       |            |               |            |            |                   |
-|                        | 4    |               |       |            |               |            |            |                   |
-|                        | 5    |               |       |            |               |            |            |                   |
-|                        | 6    |               |       |            |               |            |            |                   |
-|                        | 7    |               |       |            |               |            |            |                   |
-|                        | 8    |               |       |            |               |            |            |                   |
-|                        | 9    |               |       |            |               |            |            |                   |
-|                        | 10   |               |       |            |               |            |            |                   |
-| **Dennis Mwai Kimiri** | 1    | 2e-4   | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9504   | -20.6042   | 190.65     | Faster learning but unstable |
-|                        | 2    | 7.5e-5 | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9578   | -20.75     | 190.74     | Slower but more stable learning |
-|                        | 3    | 1.5e-4 | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9406   | -19.5      | 190.75     | Improved stability due to larger buffer |
-|                        | 4    | 1e-4   | 0.97  | 32    | 1.0           | 0.01        | 0.1           | -20.9574   | -20.5714   | 189.45     | Focus on short-term rewards |
-|                        | 5    | 1e-4   | 0.98  | 32    | 1.0           | 0.01        | 0.1           | -20.9368   | -20.3889   | 190.91     | Better long-term reward focus |
-|                        | 6    | 1.5e-4 | 0.97  | 32    | 1.0           | 0.01        | 0.1           | -20.9397   | -20.0      | 191.16     | Trade-off between speed and reward horizon |
-|                        | 7    | 1e-4   | 0.99  | 40    | 1.0           | 0.01        | 0.1           | -20.6667   | -20.25     | 190.51     | More stable updates, best early performance |
-|                        | 8    | 1e-4   | 0.99  | 48    | 1.0           | 0.01        | 0.1           | -20.9493   | -20.5      | 190.75     | Very stable but slower adaptation |
-|                        | 9    | 1e-4   | 0.99  | 32    | 1.0           | 0.005       | 0.1           | -20.9435   | -20.6      | 190.53     | Reduced exploration, risk of early convergence |
+| Member                 | Exp# | lr     | gamma | batch | epsilon_start | epsilon_end | epsilon_decay | Avg Reward | Max Reward | Avg Ep Len | Observed Behavior                                 |
+| ---------------------- | ---- | ------ | ----- | ----- | ------------- | ----------- | ------------- | ---------- | ---------- | ---------- | ------------------------------------------------- |
+| **Yvette Gahamanyi**   | 1    | 5e-4   | 0.99  | 32    | -             | 0.05        | -             | -20.96     | -18.00     | 781        | Too fast — unstable Q-values, episodes collapse   |
+|                        | 2    | 1e-3   | 0.99  | 32    | -             | 0.05        | -             | -20.96     | -18.00     | 780        | Same collapse as Exp1; LR=1e-3 diverges immediately |
+|                        | 3    | 5e-4   | 0.99  | 32    | -             | 0.05        | -             | -20.95     | -18.00     | 781        | Large buffer did not rescue high LR               |
+|                        | 4    | 1e-4   | 0.995 | 32    | -             | 0.05        | -             | -15.22     | 1.00       | 2553       | Slightly better than baseline; longer episodes    |
+|                        | 5    | 1e-4   | 0.999 | 32    | -             | 0.05        | -             | -14.77     | 15.00      | 2192       | Best max reward; high variance, capable of wins   |
+|                        | 6    | 5e-4   | 0.995 | 32    | -             | 0.05        | -             | -20.95     | -19.00     | 781        | High LR cancels gamma benefit — divergence        |
+|                        | 7    | 1e-4   | 0.99  | 64    | -             | 0.05        | -             | -14.25     | 10.00      | 2353       | Large batch; smoother gradients, longer episodes  |
+|                        | 8    | 1e-4   | 0.99  | 128   | -             | 0.05        | -             | -12.07     | 11.00      | 2755       | Best mean reward; stable learning signal          |
+|                        | 9    | 1e-4   | 0.99  | 32    | -             | 0.1         | -             | -15.56     | 3.00       | 2099       | More exploration hurt exploitation                |
+|                        | 10   | 5e-4   | 0.995 | 64    | -             | 0.1         | -             | -20.93     | -18.00     | 789        | High LR dominates; other tweaks nullified         |
+|                        | 11   | 1e-4   | 0.999 | 128   | -             | 0.1         | -             | -14.39     | 8.00       | 2348       | COH small buffer; good combo, worse than Exp12    |
+|                        | 12   | 1e-4   | 0.999 | 128   | -             | 0.1         | -             | -14.09     | 7.00       | 2453       | COH large buffer (100k); stable, max below Exp5   |
+|                        | 13   | 1e-4   | 0.999 | 128   | -             | 0.05        | -             | -13.96     | 15.00      | 2570       | COH large buffer (200k); best model               |
+| **Mariam Awini Issah** | 1    | 5e-5   | 0.99  | 24    | 1.0           | 0.01        | 0.1           | -3.0       | -3.0       | 25         | Lower LR + smaller batch                          |
+|                        | 2    | 1e-4   | 0.95  | 32    | 1.0           | 0.01        | 0.1           | -3.0       | -3.0       | 25         | Lower gamma + smaller buffer                      |
+|                        | 3    | 5e-5   | 0.95  | 24    | 1.0           | 0.01        | 0.1           | -3.0       | -3.0       | 25         | Combined lower LR, batch, gamma, buffer           |
+|                        | 4    | -      | -     | -     | -             | -           | -             | -          | -          | -          | -                                                 |
+|                        | 5    | -      | -     | -     | -             | -           | -             | -          | -          | -          | -                                                 |
+|                        | 6    | -      | -     | -     | -             | -           | -             | -          | -          | -          | -                                                 |
+|                        | 7    | -      | -     | -     | -             | -           | -             | -          | -          | -          | -                                                 |
+|                        | 8    | -      | -     | -     | -             | -           | -             | -          | -          | -          | -                                                 |
+|                        | 9    | -      | -     | -     | -             | -           | -             | -          | -          | -          | -                                                 |
+|                        | 10   | -      | -     | -     | -             | -           | -             | -          | -          | -          | -                                                 |
+| **Dennis Mwai Kimiri** | 1    | 2e-4   | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9504   | -20.6042   | 190.65     | Faster learning but unstable                      |
+|                        | 2    | 7.5e-5 | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9578   | -20.75     | 190.74     | Slower but more stable learning                   |
+|                        | 3    | 1.5e-4 | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9406   | -19.5      | 190.75     | Improved stability due to larger buffer           |
+|                        | 4    | 1e-4   | 0.97  | 32    | 1.0           | 0.01        | 0.1           | -20.9574   | -20.5714   | 189.45     | Focus on short-term rewards                       |
+|                        | 5    | 1e-4   | 0.98  | 32    | 1.0           | 0.01        | 0.1           | -20.9368   | -20.3889   | 190.91     | Better long-term reward focus                     |
+|                        | 6    | 1.5e-4 | 0.97  | 32    | 1.0           | 0.01        | 0.1           | -20.9397   | -20.0      | 191.16     | Trade-off between speed and reward horizon        |
+|                        | 7    | 1e-4   | 0.99  | 40    | 1.0           | 0.01        | 0.1           | -20.6667   | -20.25     | 190.51     | More stable updates, best early performance       |
+|                        | 8    | 1e-4   | 0.99  | 48    | 1.0           | 0.01        | 0.1           | -20.9493   | -20.5      | 190.75     | Very stable but slower adaptation                 |
+|                        | 9    | 1e-4   | 0.99  | 32    | 1.0           | 0.005       | 0.1           | -20.9435   | -20.6      | 190.53     | Reduced exploration, risk of early convergence    |
 |                        | 10   | 1.5e-4 | 0.97  | 48    | 1.0           | 0.005       | 0.1           | -20.9605   | -20.25     | 189.9      | Best combined configuration, balanced performance |
 
 ### Key Findings
@@ -228,7 +231,7 @@ The assignment mentions **epsilon_start, epsilon_end, epsilon_decay**. In Stable
 
 ### CNNPolicy (Convolutional Neural Network) **RECOMMENDED**
 
-- **Use for**: Image-based Atari games like PrivateEye
+- **Use for**: Image-based Atari games like Pong
 - **Advantage**: Learns spatial features (edges, objects, patterns)
 - **Why**: Visual agent needs to recognize game state from pixels
 - **Performance**: Generally superior for visual environments
@@ -240,12 +243,12 @@ The assignment mentions **epsilon_start, epsilon_end, epsilon_decay**. In Stable
 - **Disadvantage**: Treats pixel input as flat vector - loses spatial information
 - **Performance**: Typically underperforms on image-based games
 
-**For PrivateEye**: Use CNNPolicy for the agent to learn visual navigation skills!
+**For Pong**: Use CNNPolicy for the agent to learn visual navigation skills!
 
 ## Lessons Learned
 
 1. **Exploration vs Exploitation Trade-off**:
-2. **PrivateEye Challenge**:
+2. **Pong Challenge**:
 3. **Hyperparameter Sensitivity**:
 4. **CNN Advantage**:
 
@@ -271,6 +274,7 @@ python play.py
 **Recording Options:**
 
 1. **OBS Studio** (Free)
+
    - Open Broadcaster Software - record screen while play.py runs
    - Output as MP4 for submission
 
@@ -288,7 +292,7 @@ python play.py
 
 **What to capture:**
 
-- Agent navigating PrivateEye environment
+- Agent navigating Pong environment
 - Multiple episodes showing consistent behavior
 - Reward accumulation per episode
 - Duration: 30-60 seconds recommended
@@ -305,7 +309,7 @@ python play.py
   - **A**: Balance between trying new actions (explore) vs using best known actions (exploit)
 - **Q**: Why does gamma matter?
   - **A**: Higher gamma values future rewards more; lower gamma focuses on immediate rewards
-- **Q**: What is the reward structure in PrivateEye?
+- **Q**: What is the reward structure in Pong?
   - **A**: Sparse rewards - points given when collecting items/completing objectives
 - **Q**: How does the DQN agent learn?
   - **A**: Uses experience replay and target networks to learn Q-values from trial-and-error
@@ -335,34 +339,12 @@ python play.py
 
 ---
 
-## Assessment Rubric (30 points total)
-
-| Criterion                                     | Points |
-| --------------------------------------------- | ------ |
-| Understanding of DQN/RL Concepts              | 10     |
-| Hyperparameter Tuning & Documentation         | 5      |
-| Evaluation & Agent Performance (play.py)      | 5      |
-| Group Collaboration & Individual Contribution | 10     |
-| **Total**                                     | **30** |
-
 ## References
 
 - [Stable Baselines3 Documentation](https://stable-baselines3.readthedocs.io/)
 - [Gymnasium Documentation](https://gymnasium.farama.org/)
 - [DQN Paper](https://arxiv.org/abs/1312.5602)
 - [Atari Games](https://gymnasium.farama.org/environments/atari/)
-
-## Submission Checklist
-
-- [ ] Experiment 1-10 (Yvette) - Complete
-- [ ] Experiment 1-10 (Mariam) - Complete
-- [ ] Experiment 1-10 (Dennis) - Complete
-- [ ] Results Table Filled - Empty cells populated
-- [ ] Gameplay Video - Recorded from play.py
-- [ ] README Updated - With all results
-- [ ] GitHub Repository - All files pushed
-- [ ] Coach Slot - Booked for Week 6
-- [ ] zip file or URL - Ready for submission
 
 ---
 
