@@ -101,16 +101,16 @@ Each member conducted 10 experiments varying:
 |                        | 8    |               |       |            |               |            |            |                   |
 |                        | 9    |               |       |            |               |            |            |                   |
 |                        | 10   |               |       |            |               |            |            |                   |
-| **Dennis Mwai Kimiri** | 1    |               |       |            |               |            |            |                   |
-|                        | 2    |               |       |            |               |            |            |                   |
-|                        | 3    |               |       |            |               |            |            |                   |
-|                        | 4    |               |       |            |               |            |            |                   |
-|                        | 5    |               |       |            |               |            |            |                   |
-|                        | 6    |               |       |            |               |            |            |                   |
-|                        | 7    |               |       |            |               |            |            |                   |
-|                        | 8    |               |       |            |               |            |            |                   |
-|                        | 9    |               |       |            |               |            |            |                   |
-|                        | 10   |               |       |            |               |            |            |                   |
+| **Dennis Mwai Kimiri** | 1    | 2e-4   | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9504   | -20.6042   | 190.65     | Faster learning but unstable |
+|                        | 2    | 7.5e-5 | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9578   | -20.75     | 190.74     | Slower but more stable learning |
+|                        | 3    | 1.5e-4 | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9406   | -19.5      | 190.75     | Improved stability due to larger buffer |
+|                        | 4    | 1e-4   | 0.97  | 32    | 1.0           | 0.01        | 0.1           | -20.9574   | -20.5714   | 189.45     | Focus on short-term rewards |
+|                        | 5    | 1e-4   | 0.98  | 32    | 1.0           | 0.01        | 0.1           | -20.9368   | -20.3889   | 190.91     | Better long-term reward focus |
+|                        | 6    | 1.5e-4 | 0.97  | 32    | 1.0           | 0.01        | 0.1           | -20.9397   | -20.0      | 191.16     | Trade-off between speed and reward horizon |
+|                        | 7    | 1e-4   | 0.99  | 40    | 1.0           | 0.01        | 0.1           | -20.6667   | -20.25     | 190.51     | More stable updates, best early performance |
+|                        | 8    | 1e-4   | 0.99  | 48    | 1.0           | 0.01        | 0.1           | -20.9493   | -20.5      | 190.75     | Very stable but slower adaptation |
+|                        | 9    | 1e-4   | 0.99  | 32    | 1.0           | 0.005       | 0.1           | -20.9435   | -20.6      | 190.53     | Reduced exploration, risk of early convergence |
+|                        | 10   | 1.5e-4 | 0.97  | 48    | 1.0           | 0.005       | 0.1           | -20.9605   | -20.25     | 189.9      | Best combined configuration, balanced performance |
 
 ### Key Findings
 
@@ -125,7 +125,7 @@ Each member conducted 10 experiments varying:
 
 - **Yvette Gahamanyi**: Experiment #**_ (Avg Reward: _**)
 - **Mariam Awini Issah**: Experiment #**_ (Avg Reward: _**)
-- **Dennis Mwai Kimiri**: Experiment #**_ (Avg Reward: _**)
+- **Dennis Mwai Kimiri**: Experiment 7 (Avg Reward: 0.47)
 
 ## Agent Performance
 
