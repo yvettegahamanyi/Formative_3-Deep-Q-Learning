@@ -172,7 +172,7 @@ def run(
         model_zip = MODELS_DIR / f"dqn_mariam_exp{exp_num}.zip"
         already_ok = (
             exp_num in existing
-            and str(existing[exp_num].get("Status", "")).startswith("✓")
+            and str(existing[exp_num].get("Status", "")).startswith("[OK]")
             and model_zip.exists()
         )
 
@@ -259,10 +259,10 @@ def run(
             avg_reward, max_reward, avg_ep_len = evaluate_dqn_vecenv(
                 model, env, num_episodes=num_eval_episodes, print_episodes=True
             )
-            status = "✓ Success" if not (already_ok and improve_existing) else "✓ Success (improved)"
+            status = "[OK] Success" if not (already_ok and improve_existing) else "[OK] Success (improved)"
         except Exception as e:
             avg_reward, max_reward, avg_ep_len = 0.0, 0.0, 0
-            status = f"✗ Failed: {e}"
+            status = f"[FAIL] Failed: {e}"
         finally:
             env.close()
 
@@ -289,17 +289,17 @@ def run(
 
     df = pd.DataFrame(rows).sort_values("Exp_Num")
     df = df[CSV_COLUMNS]
-    ok_df = df[df["Status"].astype(str).str.startswith("✓")].copy()
+    ok_df = df[df["Status"].astype(str).str.startswith("[OK]")].copy()
     if len(ok_df) > 0:
         best_row = ok_df.loc[ok_df["Avg_Reward"].astype(float).idxmax()]
         best_exp = int(best_row["Exp_Num"])
         best_src = MODELS_DIR / f"dqn_mariam_exp{best_exp}.zip"
         copy_best_model(str(best_src), str(BEST_MODEL_ZIP))
-        print(f"\n✓ Best Mariam model: Exp{best_exp} -> {BEST_MODEL_ZIP}")
+        print(f"\n[OK] Best Mariam model: Exp{best_exp} -> {BEST_MODEL_ZIP}")
     else:
         print("\nNo successful runs to select a best model yet.")
 
-    print(f"\n✓ Results saved: {RESULTS_CSV}")
+    print(f"\n[OK] Results saved: {RESULTS_CSV}")
 
 
 if __name__ == "__main__":
