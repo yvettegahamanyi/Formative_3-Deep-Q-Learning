@@ -125,7 +125,7 @@ Each member conducted 10 experiments varying:
 
 - **Yvette Gahamanyi**: Experiment #**_ (Avg Reward: _**)
 - **Mariam Awini Issah**: Experiment #**_ (Avg Reward: _**)
-- **Dennis Mwai Kimiri**: Experiment 7 (Avg Reward: 0.47)
+- **Dennis Mwai Kimiri**: Experiment 7 (Avg Reward: 0.47 after 10000000 timesteps, 20.667 at 200000 timesteps for experimentation)
 
 ## Agent Performance
 
