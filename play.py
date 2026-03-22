@@ -10,7 +10,7 @@ gym.register_envs(ale_py)
 
 
 def play_private_eye(
-    model_path: str = "dqn_model",
+    model_path: str = "best_model",
     num_episodes: int = 5,
     render: bool = True,
     full_action_space_mode: str = "auto",
