@@ -9,7 +9,7 @@ from stable_baselines3.common.vec_env import VecFrameStack
 gym.register_envs(ale_py)
 
 
-def play_private_eye(
+def play_pong(
     model_path: str = "dqn_model",
     num_episodes: int = 5,
     render: bool = True,
@@ -125,7 +125,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    play_private_eye(
+    play_pong(
         model_path=args.model,
         num_episodes=args.episodes,
         render=not args.no_render,

@@ -16,12 +16,17 @@ import numpy as np
 import pandas as pd
 from stable_baselines3 import DQN
 
+# Register ALE environments
+import ale_py
+import gymnasium as gym
+gym.register_envs(ale_py)
+
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from dqn_utils import copy_best_model, evaluate_dqn_vecenv, make_private_eye_env, PrintEpisodeRewardCallback  # type: ignore
+from dqn_utils import copy_best_model, evaluate_dqn_vecenv, make_pong_env, PrintEpisodeRewardCallback  # type: ignore
 
 
 HERE = Path(__file__).resolve().parent
@@ -188,35 +193,67 @@ def run(
             f"buffer={config['buffer_size']}"
         )
 
-        env = make_private_eye_env(seed=seed, monitor_csv_path=str(MONITOR_DIR / f"exp{exp_num}.monitor.csv"))
+        # Try both action space settings to match the saved model if loading
+        env = None
+        model = None
+        for full_action_space_trial in (False, True):
+            try:
+                env = make_pong_env(seed=seed, monitor_csv_path=str(MONITOR_DIR / f"exp{exp_num}.monitor.csv"), full_action_space=full_action_space_trial)
+                
+                print_callback = PrintEpisodeRewardCallback()
+                if already_ok and improve_existing:
+                    print(f"Improving existing Exp{exp_num} for +{extra_timesteps} timesteps (action_space={full_action_space_trial})...")
+                    try:
+                        model = DQN.load(str(model_zip.with_suffix("").as_posix()), env=env)
+                        model.learn(
+                            total_timesteps=extra_timesteps,
+                            callback=print_callback,
+                            reset_num_timesteps=False,
+                        )
+                        break  # Success - exit the loop
+                    except ValueError as e:
+                        if "Action spaces do not match" in str(e):
+                            env.close()
+                            env = None
+                            continue  # Try next action space setting
+                        raise
+                else:
+                    model = DQN(
+                        policy=config["policy"],
+                        env=env,
+                        learning_rate=config["learning_rate"],
+                        buffer_size=config["buffer_size"],
+                        learning_starts=config["learning_starts"],
+                        batch_size=config["batch_size"],
+                        tau=config["tau"],
+                        gamma=config["gamma"],
+                        train_freq=config["train_freq"],
+                        gradient_steps=config["gradient_steps"],
+                        exploration_fraction=config["exploration_fraction"],
+                        exploration_final_eps=config["exploration_final_eps"],
+                        target_update_interval=config["target_update_interval"],
+                        verbose=config["verbose"],
+                    )
+                    model.learn(total_timesteps=total_timesteps, callback=print_callback)
+                    break  # Success - exit the loop
+                
+            except ValueError as e:
+                if env is not None:
+                    env.close()
+                    env = None
+                if "Action spaces do not match" in str(e):
+                    continue  # Try next action space setting
+                raise
+            except Exception as e:
+                if env is not None:
+                    env.close()
+                    env = None
+                raise
+        
+        if model is None or env is None:
+            raise RuntimeError(f"Failed to create or load model for Exp{exp_num} with either action space setting")
+        
         try:
-            print_callback = PrintEpisodeRewardCallback()
-            if already_ok and improve_existing:
-                print(f"Improving existing Exp{exp_num} for +{extra_timesteps} timesteps...")
-                model = DQN.load(str(model_zip.with_suffix("").as_posix()), env=env)
-                model.learn(
-                    total_timesteps=extra_timesteps,
-                    callback=print_callback,
-                    reset_num_timesteps=False,
-                )
-            else:
-                model = DQN(
-                    policy=config["policy"],
-                    env=env,
-                    learning_rate=config["learning_rate"],
-                    buffer_size=config["buffer_size"],
-                    learning_starts=config["learning_starts"],
-                    batch_size=config["batch_size"],
-                    tau=config["tau"],
-                    gamma=config["gamma"],
-                    train_freq=config["train_freq"],
-                    gradient_steps=config["gradient_steps"],
-                    exploration_fraction=config["exploration_fraction"],
-                    exploration_final_eps=config["exploration_final_eps"],
-                    target_update_interval=config["target_update_interval"],
-                    verbose=config["verbose"],
-                )
-                model.learn(total_timesteps=total_timesteps, callback=print_callback)
             model.save(str(model_zip.with_suffix("").as_posix()))
 
             avg_reward, max_reward, avg_ep_len = evaluate_dqn_vecenv(
@@ -267,17 +304,30 @@ def run(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Mariam: 10 hyperparameter experiments with optional improvement.")
-    parser.add_argument("--total-timesteps", type=int, default=50_000)
-    parser.add_argument("--extra-timesteps", type=int, default=20_000)
-    parser.add_argument("--eval-episodes", type=int, default=2)
+    parser.add_argument("--quick", action="store_true", help="Quick mode: 10K timesteps, 1 eval episode (for testing)")
+    parser.add_argument("--total-timesteps", type=int, default=None, help="Total training timesteps (default: 500K full, 10K quick)")
+    parser.add_argument("--extra-timesteps", type=int, default=None, help="Extra timesteps for improvement (default: 200K full, 5K quick)")
+    parser.add_argument("--eval-episodes", type=int, default=None, help="Evaluation episodes (default: 2 full, 1 quick)")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--improve-existing", action="store_true", help="Continue training existing models for +extra-timesteps")
     args = parser.parse_args()
 
+    # Auto-adjust defaults based on --quick flag
+    if args.quick:
+        total_timesteps = args.total_timesteps if args.total_timesteps is not None else 10_000
+        extra_timesteps = args.extra_timesteps if args.extra_timesteps is not None else 5_000
+        num_eval_episodes = args.eval_episodes if args.eval_episodes is not None else 1
+        print("\n[QUICK MODE] 10K training, 1 eval episode (for testing)")
+    else:
+        total_timesteps = args.total_timesteps if args.total_timesteps is not None else 500_000
+        extra_timesteps = args.extra_timesteps if args.extra_timesteps is not None else 200_000
+        num_eval_episodes = args.eval_episodes if args.eval_episodes is not None else 2
+        print("\n[FULL MODE] 500K training, 2 eval episodes")
+
     run(
-        total_timesteps=args.total_timesteps,
-        extra_timesteps=args.extra_timesteps,
-        num_eval_episodes=args.eval_episodes,
+        total_timesteps=total_timesteps,
+        extra_timesteps=extra_timesteps,
+        num_eval_episodes=num_eval_episodes,
         seed=args.seed,
         improve_existing=args.improve_existing,
     )
