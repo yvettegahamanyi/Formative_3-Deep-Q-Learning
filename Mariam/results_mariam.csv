@@ -1,11 +1,11 @@
 Member,Exp_Num,Experiment,lr,gamma,batch_size,epsilon_start,epsilon_end,epsilon_decay,buffer_size,Avg_Reward,Max_Reward,Avg_Ep_Len,Status
-Mariam Awini Issah,1,Exp1: Lower LR + Smaller Batch,5e-05,0.99,24,1.0,0.01,0.1,30000,-13.0,-5.0,117,✓ Success (improved)
-Mariam Awini Issah,2,Exp2: Lower Gamma + Smaller Buffer,0.0001,0.95,32,1.0,0.01,0.1,30000,-13.5,-6.0,126,✓ Success (improved)
-Mariam Awini Issah,3,Exp3: Combine (Lower LR + Smaller Batch + Lower Gamma + Smaller Buffer),5e-05,0.95,24,1.0,0.01,0.1,30000,0.0,0.0,0,✗ Failed: Action spaces do not match: Discrete(6) != Discrete(18)
-Mariam Awini Issah,4,Exp4: Very Low LR + Lower Epsilon End,1e-05,0.99,32,1.0,0.005,0.1,30000,0.0,0.0,0,✗ Failed: Action spaces do not match: Discrete(6) != Discrete(18)
-Mariam Awini Issah,5,Exp5: Very Low Gamma + Faster Epsilon Decay,0.0001,0.9,32,1.0,0.01,0.05,30000,0.0,0.0,0,✗ Failed: Action spaces do not match: Discrete(6) != Discrete(18)
-Mariam Awini Issah,6,Exp6: Combine (Very Low LR + Very Low Gamma + Epsilon Tweaks),1e-05,0.9,32,1.0,0.005,0.05,30000,0.0,0.0,0,✗ Failed: Action spaces do not match: Discrete(6) != Discrete(18)
-Mariam Awini Issah,7,Exp7: Smaller Batch + Smaller Buffer,0.0001,0.99,16,1.0,0.01,0.1,30000,0.0,0.0,0,✗ Failed: Action spaces do not match: Discrete(6) != Discrete(18)
-Mariam Awini Issah,8,Exp8: Very Small Batch + Very Low Epsilon End,0.0001,0.99,8,1.0,0.001,0.1,30000,0.0,0.0,0,✗ Failed: Action spaces do not match: Discrete(6) != Discrete(18)
-Mariam Awini Issah,9,Exp9: Combine (Very Small Batch + Smaller Buffer + Very Low Epsilon End),0.0001,0.99,8,1.0,0.001,0.1,30000,0.0,0.0,0,✗ Failed: Action spaces do not match: Discrete(6) != Discrete(18)
-Mariam Awini Issah,10,Exp10: Combined Lower (best guess),5e-05,0.95,16,1.0,0.001,0.05,30000,0.0,0.0,0,✗ Failed: Action spaces do not match: Discrete(6) != Discrete(18)
+Mariam Awini Issah,1,Exp1: Lower LR + Smaller Batch,5e-05,0.99,24,1.0,0.01,0.1,30000,-3.0,-3.0,25,[OK] Success
+Mariam Awini Issah,2,Exp2: Lower Gamma + Smaller Buffer,0.0001,0.95,32,1.0,0.01,0.1,30000,-3.0,-3.0,25,[OK] Success
+Mariam Awini Issah,3,Exp3: Combine (Lower LR + Smaller Batch + Lower Gamma + Smaller Buffer),5e-05,0.95,24,1.0,0.01,0.1,30000,-3.0,-3.0,25,[OK] Success
+Mariam Awini Issah,4,Exp4: Very Low LR + Lower Epsilon End,1e-05,0.99,32,1.0,0.005,0.1,30000,-3.0,-3.0,25,[OK] Success
+Mariam Awini Issah,5,Exp5: Very Low Gamma + Faster Epsilon Decay,0.0001,0.9,32,1.0,0.01,0.05,30000,-3.0,-3.0,25,[OK] Success
+Mariam Awini Issah,6,Exp6: Combine (Very Low LR + Very Low Gamma + Epsilon Tweaks),1e-05,0.9,32,1.0,0.005,0.05,30000,-3.0,-3.0,25,[OK] Success
+Mariam Awini Issah,7,Exp7: Smaller Batch + Smaller Buffer,0.0001,0.99,16,1.0,0.01,0.1,30000,-3.0,-3.0,25,[OK] Success
+Mariam Awini Issah,8,Exp8: Very Small Batch + Very Low Epsilon End,0.0001,0.99,8,1.0,0.001,0.1,30000,-3.0,-3.0,25,[OK] Success
+Mariam Awini Issah,9,Exp9: Combine (Very Small Batch + Smaller Buffer + Very Low Epsilon End),0.0001,0.99,8,1.0,0.001,0.1,30000,-3.0,-3.0,25,[OK] Success
+Mariam Awini Issah,10,Exp10: Combined Lower (best guess),5e-05,0.95,16,1.0,0.001,0.05,30000,-3.0,-3.0,25,[OK] Success

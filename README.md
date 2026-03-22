@@ -79,41 +79,41 @@ Each member conducted 10 experiments varying:
 
 ### Results Table: All 33 Experiments
 
-| Member                 | Exp# | lr     | gamma | batch | epsilon_start | epsilon_end | epsilon_decay | Avg Reward | Max Reward | Avg Ep Len | Observed Behavior                                 |
-| ---------------------- | ---- | ------ | ----- | ----- | ------------- | ----------- | ------------- | ---------- | ---------- | ---------- | ------------------------------------------------- |
-| **Yvette Gahamanyi**   | 1    | 5e-4   | 0.99  | 32    | -             | 0.05        | -             | -20.96     | -18.00     | 781        | Too fast — unstable Q-values, episodes collapse   |
+| Member                 | Exp# | lr     | gamma | batch | epsilon_start | epsilon_end | epsilon_decay | Avg Reward | Max Reward | Avg Ep Len | Observed Behavior                                   |
+| ---------------------- | ---- | ------ | ----- | ----- | ------------- | ----------- | ------------- | ---------- | ---------- | ---------- | --------------------------------------------------- |
+| **Yvette Gahamanyi**   | 1    | 5e-4   | 0.99  | 32    | -             | 0.05        | -             | -20.96     | -18.00     | 781        | Too fast — unstable Q-values, episodes collapse     |
 |                        | 2    | 1e-3   | 0.99  | 32    | -             | 0.05        | -             | -20.96     | -18.00     | 780        | Same collapse as Exp1; LR=1e-3 diverges immediately |
-|                        | 3    | 5e-4   | 0.99  | 32    | -             | 0.05        | -             | -20.95     | -18.00     | 781        | Large buffer did not rescue high LR               |
-|                        | 4    | 1e-4   | 0.995 | 32    | -             | 0.05        | -             | -15.22     | 1.00       | 2553       | Slightly better than baseline; longer episodes    |
-|                        | 5    | 1e-4   | 0.999 | 32    | -             | 0.05        | -             | -14.77     | 15.00      | 2192       | Best max reward; high variance, capable of wins   |
-|                        | 6    | 5e-4   | 0.995 | 32    | -             | 0.05        | -             | -20.95     | -19.00     | 781        | High LR cancels gamma benefit — divergence        |
-|                        | 7    | 1e-4   | 0.99  | 64    | -             | 0.05        | -             | -14.25     | 10.00      | 2353       | Large batch; smoother gradients, longer episodes  |
-|                        | 8    | 1e-4   | 0.99  | 128   | -             | 0.05        | -             | -12.07     | 11.00      | 2755       | Best mean reward; stable learning signal          |
-|                        | 9    | 1e-4   | 0.99  | 32    | -             | 0.1         | -             | -15.56     | 3.00       | 2099       | More exploration hurt exploitation                |
-|                        | 10   | 5e-4   | 0.995 | 64    | -             | 0.1         | -             | -20.93     | -18.00     | 789        | High LR dominates; other tweaks nullified         |
-|                        | 11   | 1e-4   | 0.999 | 128   | -             | 0.1         | -             | -14.39     | 8.00       | 2348       | COH small buffer; good combo, worse than Exp12    |
-|                        | 12   | 1e-4   | 0.999 | 128   | -             | 0.1         | -             | -14.09     | 7.00       | 2453       | COH large buffer (100k); stable, max below Exp5   |
-|                        | 13   | 1e-4   | 0.999 | 128   | -             | 0.05        | -             | -13.96     | 15.00      | 2570       | COH large buffer (200k); best model               |
-| **Mariam Awini Issah** | 1    | 5e-5   | 0.99  | 24    | 1.0           | 0.01        | 0.1           | -3.0       | -3.0       | 25         | Lower LR + smaller batch                          |
-|                        | 2    | 1e-4   | 0.95  | 32    | 1.0           | 0.01        | 0.1           | -3.0       | -3.0       | 25         | Lower gamma + smaller buffer                      |
-|                        | 3    | 5e-5   | 0.95  | 24    | 1.0           | 0.01        | 0.1           | -3.0       | -3.0       | 25         | Combined lower LR, batch, gamma, buffer           |
-|                        | 4    | -      | -     | -     | -             | -           | -             | -          | -          | -          | -                                                 |
-|                        | 5    | -      | -     | -     | -             | -           | -             | -          | -          | -          | -                                                 |
-|                        | 6    | -      | -     | -     | -             | -           | -             | -          | -          | -          | -                                                 |
-|                        | 7    | -      | -     | -     | -             | -           | -             | -          | -          | -          | -                                                 |
-|                        | 8    | -      | -     | -     | -             | -           | -             | -          | -          | -          | -                                                 |
-|                        | 9    | -      | -     | -     | -             | -           | -             | -          | -          | -          | -                                                 |
-|                        | 10   | -      | -     | -     | -             | -           | -             | -          | -          | -          | -                                                 |
-| **Dennis Mwai Kimiri** | 1    | 2e-4   | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9504   | -20.6042   | 190.65     | Faster learning but unstable                      |
-|                        | 2    | 7.5e-5 | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9578   | -20.75     | 190.74     | Slower but more stable learning                   |
-|                        | 3    | 1.5e-4 | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9406   | -19.5      | 190.75     | Improved stability due to larger buffer           |
-|                        | 4    | 1e-4   | 0.97  | 32    | 1.0           | 0.01        | 0.1           | -20.9574   | -20.5714   | 189.45     | Focus on short-term rewards                       |
-|                        | 5    | 1e-4   | 0.98  | 32    | 1.0           | 0.01        | 0.1           | -20.9368   | -20.3889   | 190.91     | Better long-term reward focus                     |
-|                        | 6    | 1.5e-4 | 0.97  | 32    | 1.0           | 0.01        | 0.1           | -20.9397   | -20.0      | 191.16     | Trade-off between speed and reward horizon        |
-|                        | 7    | 1e-4   | 0.99  | 40    | 1.0           | 0.01        | 0.1           | -20.6667   | -20.25     | 190.51     | More stable updates, best early performance       |
-|                        | 8    | 1e-4   | 0.99  | 48    | 1.0           | 0.01        | 0.1           | -20.9493   | -20.5      | 190.75     | Very stable but slower adaptation                 |
-|                        | 9    | 1e-4   | 0.99  | 32    | 1.0           | 0.005       | 0.1           | -20.9435   | -20.6      | 190.53     | Reduced exploration, risk of early convergence    |
-|                        | 10   | 1.5e-4 | 0.97  | 48    | 1.0           | 0.005       | 0.1           | -20.9605   | -20.25     | 189.9      | Best combined configuration, balanced performance |
+|                        | 3    | 5e-4   | 0.99  | 32    | -             | 0.05        | -             | -20.95     | -18.00     | 781        | Large buffer did not rescue high LR                 |
+|                        | 4    | 1e-4   | 0.995 | 32    | -             | 0.05        | -             | -15.22     | 1.00       | 2553       | Slightly better than baseline; longer episodes      |
+|                        | 5    | 1e-4   | 0.999 | 32    | -             | 0.05        | -             | -14.77     | 15.00      | 2192       | Best max reward; high variance, capable of wins     |
+|                        | 6    | 5e-4   | 0.995 | 32    | -             | 0.05        | -             | -20.95     | -19.00     | 781        | High LR cancels gamma benefit — divergence          |
+|                        | 7    | 1e-4   | 0.99  | 64    | -             | 0.05        | -             | -14.25     | 10.00      | 2353       | Large batch; smoother gradients, longer episodes    |
+|                        | 8    | 1e-4   | 0.99  | 128   | -             | 0.05        | -             | -12.07     | 11.00      | 2755       | Best mean reward; stable learning signal            |
+|                        | 9    | 1e-4   | 0.99  | 32    | -             | 0.1         | -             | -15.56     | 3.00       | 2099       | More exploration hurt exploitation                  |
+|                        | 10   | 5e-4   | 0.995 | 64    | -             | 0.1         | -             | -20.93     | -18.00     | 789        | High LR dominates; other tweaks nullified           |
+|                        | 11   | 1e-4   | 0.999 | 128   | -             | 0.1         | -             | -14.39     | 8.00       | 2348       | COH small buffer; good combo, worse than Exp12      |
+|                        | 12   | 1e-4   | 0.999 | 128   | -             | 0.1         | -             | -14.09     | 7.00       | 2453       | COH large buffer (100k); stable, max below Exp5     |
+|                        | 13   | 1e-4   | 0.999 | 128   | -             | 0.05        | -             | -13.96     | 15.00      | 2570       | COH large buffer (200k); best model                 |
+| **Mariam Awini Issah** | 1    | 5e-5   | 0.99  | 24    | 1.0           | 0.01        | 0.1           | -3.0       | -3.0       | 25         | Lower LR + smaller batch                            |
+|                        | 2    | 1e-4   | 0.95  | 32    | 1.0           | 0.01        | 0.1           | -3.0       | -3.0       | 25         | Lower gamma + smaller buffer                        |
+|                        | 3    | 5e-5   | 0.95  | 24    | 1.0           | 0.01        | 0.1           | -3.0       | -3.0       | 25         | Combined lower LR, batch, gamma, buffer             |
+|                        | 4    | 1e-5   | 0.99  | 32    | 1.0           | 0.005       | 0.1           | -3.0       | -3.0       | 25         | Very low LR + lower epsilon end                     |
+|                        | 5    | 1e-4   | 0.9   | 32    | 1.0           | 0.01        | 0.05          | -3.0       | -3.0       | 25         | Very low gamma + faster epsilon decay               |
+|                        | 6    | 1e-5   | 0.9   | 32    | 1.0           | 0.005       | 0.05          | -3.0       | -3.0       | 25         | Very low LR + gamma + epsilon tweaks                |
+|                        | 7    | 1e-4   | 0.99  | 16    | 1.0           | 0.01        | 0.1           | -3.0       | -3.0       | 25         | Smaller batch + smaller buffer                      |
+|                        | 8    | 1e-4   | 0.99  | 8     | 1.0           | 0.001       | 0.1           | -3.0       | -3.0       | 25         | Very small batch + very low epsilon end             |
+|                        | 9    | 1e-4   | 0.99  | 8     | 1.0           | 0.001       | 0.1           | -3.0       | -3.0       | 25         | Tiny batch + buffer + very low epsilon (combined)   |
+|                        | 10   | 5e-5   | 0.95  | 16    | 1.0           | 0.001       | 0.05          | -3.0       | -3.0       | 25         | Combined lower settings (best guess)                |
+| **Dennis Mwai Kimiri** | 1    | 2e-4   | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9504   | -20.6042   | 190.65     | Faster learning but unstable                        |
+|                        | 2    | 7.5e-5 | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9578   | -20.75     | 190.74     | Slower but more stable learning                     |
+|                        | 3    | 1.5e-4 | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9406   | -19.5      | 190.75     | Improved stability due to larger buffer             |
+|                        | 4    | 1e-4   | 0.97  | 32    | 1.0           | 0.01        | 0.1           | -20.9574   | -20.5714   | 189.45     | Focus on short-term rewards                         |
+|                        | 5    | 1e-4   | 0.98  | 32    | 1.0           | 0.01        | 0.1           | -20.9368   | -20.3889   | 190.91     | Better long-term reward focus                       |
+|                        | 6    | 1.5e-4 | 0.97  | 32    | 1.0           | 0.01        | 0.1           | -20.9397   | -20.0      | 191.16     | Trade-off between speed and reward horizon          |
+|                        | 7    | 1e-4   | 0.99  | 40    | 1.0           | 0.01        | 0.1           | -20.6667   | -20.25     | 190.51     | More stable updates, best early performance         |
+|                        | 8    | 1e-4   | 0.99  | 48    | 1.0           | 0.01        | 0.1           | -20.9493   | -20.5      | 190.75     | Very stable but slower adaptation                   |
+|                        | 9    | 1e-4   | 0.99  | 32    | 1.0           | 0.005       | 0.1           | -20.9435   | -20.6      | 190.53     | Reduced exploration, risk of early convergence      |
+|                        | 10   | 1.5e-4 | 0.97  | 48    | 1.0           | 0.005       | 0.1           | -20.9605   | -20.25     | 189.9      | Best combined configuration, balanced performance   |
 
 ### Key Findings
 
@@ -194,10 +194,9 @@ python play.py
 
 **Collaboration Notes:**
 
-- All members use shared `train.py` and `play.py`
+- All members use shared `train.py` and `play.py` or create their own training file according to their preference
 - Independent experiment notebooks for each member
 - Results consolidated in README table
-- Group presentation (10 min total: 2 min/member + 4 min gameplay)
 
 ## DQN Hyperparameter Guide
 
@@ -252,90 +251,9 @@ The assignment mentions **epsilon_start, epsilon_end, epsilon_decay**. In Stable
 3. **Hyperparameter Sensitivity**:
 4. **CNN Advantage**:
 
-## Presentation Details
-
-- **Duration**: 10 minutes (2 min per member + 4 min gameplay)
-- **Date**: [To be scheduled - Week 6]
-- **Cameras**: MUST remain ON for entire presentation
-- **Format**:
-  - 2 minutes per member on experiments and insights
-  - Group gameplay demo
-  - Q&A session
-
 ### Recording Gameplay Video (for presentation)
 
-Use `play.py` to record agent performance:
-
-```bash
-# Run play.py and record screen output
-python play.py
-```
-
-**Recording Options:**
-
-1. **OBS Studio** (Free)
-
-   - Open Broadcaster Software - record screen while play.py runs
-   - Output as MP4 for submission
-
-2. **Screen Capture (Windows)**
-
-   ```powershell
-   # Built-in Windows recording
-   # Press Win + G to open game bar
-   # Press Win + Alt + R to start recording
-   ```
-
-3. **Python with cv2**
-   - Modify play.py to save video frames directly
-   - (Optional for advanced implementation)
-
-**What to capture:**
-
-- Agent navigating Pong environment
-- Multiple episodes showing consistent behavior
-- Reward accumulation per episode
-- Duration: 30-60 seconds recommended
-
----
-
-### Group Presentation Q&A Preparation
-
-**Key Topics All Members Must Be Ready to Answer:**
-
-#### 1. Understanding of DQN/RL Concepts
-
-- **Q**: What is the exploration-exploration trade-off?
-  - **A**: Balance between trying new actions (explore) vs using best known actions (exploit)
-- **Q**: Why does gamma matter?
-  - **A**: Higher gamma values future rewards more; lower gamma focuses on immediate rewards
-- **Q**: What is the reward structure in Pong?
-  - **A**: Sparse rewards - points given when collecting items/completing objectives
-- **Q**: How does the DQN agent learn?
-  - **A**: Uses experience replay and target networks to learn Q-values from trial-and-error
-
-#### 2. Hyperparameter Tuning Trade-offs
-
-- **Q**: Why did you choose higher/lower/average parameters?
-  - **A**: To test different learning speeds and stability levels
-- **Q**: What trade-off did you observe?
-  - **A**: Higher LR = faster learning but potential instability; Lower LR = stable but slow
-- **Q**: Which parameter had the biggest impact?
-  - **A**: [To be filled based on experiments]
-
-#### 3. Model Behavior
-
-- **Q**: Why does your final model behave the way it does?
-  - **A**: [Describe learned navigation strategy based on experiments]
-- **Q**: Did the agent learn to explore or exploit more?
-  - **A**: [Based on epsilon_final and rewards collected]
-
-#### 4. Policy Architecture
-
-- **Q**: Why did you choose CNNPolicy over MlpPolicy?
-  - **A**: CNN learns spatial features from pixels; essential for visual navigation task
-- **Q**: What happens if you use MlpPolicy instead?
-  - **A**: Agent treats flattened pixels as independent values - loses spatial information
+link to the video: https://drive.google.com/file/d/19l_ln5XXU7x4S-b8p0kHFiIdjHYLW56O/view?usp=sharing
 
 ---
 
@@ -345,8 +263,3 @@ python play.py
 - [Gymnasium Documentation](https://gymnasium.farama.org/)
 - [DQN Paper](https://arxiv.org/abs/1312.5602)
 - [Atari Games](https://gymnasium.farama.org/environments/atari/)
-
----
-
-**Last Updated**: March 16, 2026
-**Status**: In Progress - Awaiting member experiments
