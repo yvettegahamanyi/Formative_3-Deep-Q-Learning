@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Formative 3: Deep Q-Learning (DQN) - Pong Atari
+=======
+# Formative 3: Deep Q-Learning (DQN) - Pong
+>>>>>>> 8aa255de7332feac4c7bb10059f4e0fd9974eff5
 
 ## Team Members:
 
@@ -14,7 +18,11 @@ This project implements a Deep Q-Network (DQN) agent trained on the **Pong** Ata
 
 - **Game**: Pong-v5 (ALE/Pong-v5)
 - **Agent Type**: DQN with CNNPolicy
+<<<<<<< HEAD
 - **Objective**: Play Pong without losing (maximize score)
+=======
+- **Objective**: Shoot ball back
+>>>>>>> 8aa255de7332feac4c7bb10059f4e0fd9974eff5
 
 ## Project Structure
 
@@ -77,40 +85,43 @@ Each member conducted 10 experiments varying:
 - **Target Update Interval**: [500, 1000, 2000, 5000]
 - **Buffer Size**: [30000, 50000, 100000]
 
-### Results Table: All 30 Experiments
+### Results Table: All 33 Experiments
 
-| Member                 | Exp# | lr | gamma | batch | epsilon_start | epsilon_end | epsilon_decay | Avg Reward | Max Reward | Avg Ep Len | Observed Behavior |
-| ---------------------- | ---- | -- | ----- | ----- | ------------- | ----------- | ------------- | ---------- | ---------- | ---------- | ----------------- |
-| **Yvette Gahamanyi**   | 1    |               |       |            |               |            |            |                   |
-|                        | 2    |               |       |            |               |            |            |                   |
-|                        | 3    |               |       |            |               |            |            |                   |
-|                        | 4    |               |       |            |               |            |            |                   |
-|                        | 5    |               |       |            |               |            |            |                   |
-|                        | 6    |               |       |            |               |            |            |                   |
-|                        | 7    |               |       |            |               |            |            |                   |
-|                        | 8    |               |       |            |               |            |            |                   |
-|                        | 9    |               |       |            |               |            |            |                   |
-|                        | 10   |               |       |            |               |            |            |                   |
-| **Mariam Awini Issah** | 1    |               |       |            |               |            |            |                   |
-|                        | 2    |               |       |            |               |            |            |                   |
-|                        | 3    |               |       |            |               |            |            |                   |
-|                        | 4    |               |       |            |               |            |            |                   |
-|                        | 5    |               |       |            |               |            |            |                   |
-|                        | 6    |               |       |            |               |            |            |                   |
-|                        | 7    |               |       |            |               |            |            |                   |
-|                        | 8    |               |       |            |               |            |            |                   |
-|                        | 9    |               |       |            |               |            |            |                   |
-|                        | 10   |               |       |            |               |            |            |                   |
-| **Dennis Mwai Kimiri** | 1    |               |       |            |               |            |            |                   |
-|                        | 2    |               |       |            |               |            |            |                   |
-|                        | 3    |               |       |            |               |            |            |                   |
-|                        | 4    |               |       |            |               |            |            |                   |
-|                        | 5    |               |       |            |               |            |            |                   |
-|                        | 6    |               |       |            |               |            |            |                   |
-|                        | 7    |               |       |            |               |            |            |                   |
-|                        | 8    |               |       |            |               |            |            |                   |
-|                        | 9    |               |       |            |               |            |            |                   |
-|                        | 10   |               |       |            |               |            |            |                   |
+| Member                 | Exp# | lr     | gamma | batch | epsilon_start | epsilon_end | epsilon_decay | Avg Reward | Max Reward | Avg Ep Len | Observed Behavior                                   |
+| ---------------------- | ---- | ------ | ----- | ----- | ------------- | ----------- | ------------- | ---------- | ---------- | ---------- | --------------------------------------------------- |
+| **Yvette Gahamanyi**   | 1    | 5e-4   | 0.99  | 32    | -             | 0.05        | -             | -20.96     | -18.00     | 781        | Too fast — unstable Q-values, episodes collapse     |
+|                        | 2    | 1e-3   | 0.99  | 32    | -             | 0.05        | -             | -20.96     | -18.00     | 780        | Same collapse as Exp1; LR=1e-3 diverges immediately |
+|                        | 3    | 5e-4   | 0.99  | 32    | -             | 0.05        | -             | -20.95     | -18.00     | 781        | Large buffer did not rescue high LR                 |
+|                        | 4    | 1e-4   | 0.995 | 32    | -             | 0.05        | -             | -15.22     | 1.00       | 2553       | Slightly better than baseline; longer episodes      |
+|                        | 5    | 1e-4   | 0.999 | 32    | -             | 0.05        | -             | -14.77     | 15.00      | 2192       | Best max reward; high variance, capable of wins     |
+|                        | 6    | 5e-4   | 0.995 | 32    | -             | 0.05        | -             | -20.95     | -19.00     | 781        | High LR cancels gamma benefit — divergence          |
+|                        | 7    | 1e-4   | 0.99  | 64    | -             | 0.05        | -             | -14.25     | 10.00      | 2353       | Large batch; smoother gradients, longer episodes    |
+|                        | 8    | 1e-4   | 0.99  | 128   | -             | 0.05        | -             | -12.07     | 11.00      | 2755       | Best mean reward; stable learning signal            |
+|                        | 9    | 1e-4   | 0.99  | 32    | -             | 0.1         | -             | -15.56     | 3.00       | 2099       | More exploration hurt exploitation                  |
+|                        | 10   | 5e-4   | 0.995 | 64    | -             | 0.1         | -             | -20.93     | -18.00     | 789        | High LR dominates; other tweaks nullified           |
+|                        | 11   | 1e-4   | 0.999 | 128   | -             | 0.1         | -             | -14.39     | 8.00       | 2348       | COH small buffer; good combo, worse than Exp12      |
+|                        | 12   | 1e-4   | 0.999 | 128   | -             | 0.1         | -             | -14.09     | 7.00       | 2453       | COH large buffer (100k); stable, max below Exp5     |
+|                        | 13   | 1e-4   | 0.999 | 128   | -             | 0.05        | -             | -13.96     | 15.00      | 2570       | COH large buffer (200k); best model                 |
+| **Mariam Awini Issah** | 1    | 5e-5   | 0.99  | 24    | 1.0           | 0.01        | 0.1           | -3.0       | -3.0       | 25         | Lower LR + smaller batch                            |
+|                        | 2    | 1e-4   | 0.95  | 32    | 1.0           | 0.01        | 0.1           | -3.0       | -3.0       | 25         | Lower gamma + smaller buffer                        |
+|                        | 3    | 5e-5   | 0.95  | 24    | 1.0           | 0.01        | 0.1           | -3.0       | -3.0       | 25         | Combined lower LR, batch, gamma, buffer             |
+|                        | 4    | 1e-5   | 0.99  | 32    | 1.0           | 0.005       | 0.1           | -3.0       | -3.0       | 25         | Very low LR + lower epsilon end                     |
+|                        | 5    | 1e-4   | 0.9   | 32    | 1.0           | 0.01        | 0.05          | -3.0       | -3.0       | 25         | Very low gamma + faster epsilon decay               |
+|                        | 6    | 1e-5   | 0.9   | 32    | 1.0           | 0.005       | 0.05          | -3.0       | -3.0       | 25         | Very low LR + gamma + epsilon tweaks                |
+|                        | 7    | 1e-4   | 0.99  | 16    | 1.0           | 0.01        | 0.1           | -3.0       | -3.0       | 25         | Smaller batch + smaller buffer                      |
+|                        | 8    | 1e-4   | 0.99  | 8     | 1.0           | 0.001       | 0.1           | -3.0       | -3.0       | 25         | Very small batch + very low epsilon end             |
+|                        | 9    | 1e-4   | 0.99  | 8     | 1.0           | 0.001       | 0.1           | -3.0       | -3.0       | 25         | Tiny batch + buffer + very low epsilon (combined)   |
+|                        | 10   | 5e-5   | 0.95  | 16    | 1.0           | 0.001       | 0.05          | -3.0       | -3.0       | 25         | Combined lower settings (best guess)                |
+| **Dennis Mwai Kimiri** | 1    | 2e-4   | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9504   | -20.6042   | 190.65     | Faster learning but unstable                        |
+|                        | 2    | 7.5e-5 | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9578   | -20.75     | 190.74     | Slower but more stable learning                     |
+|                        | 3    | 1.5e-4 | 0.99  | 32    | 1.0           | 0.01        | 0.1           | -20.9406   | -19.5      | 190.75     | Improved stability due to larger buffer             |
+|                        | 4    | 1e-4   | 0.97  | 32    | 1.0           | 0.01        | 0.1           | -20.9574   | -20.5714   | 189.45     | Focus on short-term rewards                         |
+|                        | 5    | 1e-4   | 0.98  | 32    | 1.0           | 0.01        | 0.1           | -20.9368   | -20.3889   | 190.91     | Better long-term reward focus                       |
+|                        | 6    | 1.5e-4 | 0.97  | 32    | 1.0           | 0.01        | 0.1           | -20.9397   | -20.0      | 191.16     | Trade-off between speed and reward horizon          |
+|                        | 7    | 1e-4   | 0.99  | 40    | 1.0           | 0.01        | 0.1           | -20.6667   | -20.25     | 190.51     | More stable updates, best early performance         |
+|                        | 8    | 1e-4   | 0.99  | 48    | 1.0           | 0.01        | 0.1           | -20.9493   | -20.5      | 190.75     | Very stable but slower adaptation                   |
+|                        | 9    | 1e-4   | 0.99  | 32    | 1.0           | 0.005       | 0.1           | -20.9435   | -20.6      | 190.53     | Reduced exploration, risk of early convergence      |
+|                        | 10   | 1.5e-4 | 0.97  | 48    | 1.0           | 0.005       | 0.1           | -20.9605   | -20.25     | 189.9      | Best combined configuration, balanced performance   |
 
 ### Key Findings
 
@@ -125,7 +136,7 @@ Each member conducted 10 experiments varying:
 
 - **Yvette Gahamanyi**: Experiment #**_ (Avg Reward: _**)
 - **Mariam Awini Issah**: Experiment #**_ (Avg Reward: _**)
-- **Dennis Mwai Kimiri**: Experiment #**_ (Avg Reward: _**)
+- **Dennis Mwai Kimiri**: Experiment 7 (Avg Reward: 0.47 after 10000000 timesteps, 20.667 at 200000 timesteps for experimentation)
 
 ## Agent Performance
 
@@ -191,10 +202,9 @@ python play.py
 
 **Collaboration Notes:**
 
-- All members use shared `train.py` and `play.py`
+- All members use shared `train.py` and `play.py` or create their own training file according to their preference
 - Independent experiment notebooks for each member
 - Results consolidated in README table
-- Group presentation (10 min total: 2 min/member + 4 min gameplay)
 
 ## DQN Hyperparameter Guide
 
@@ -226,7 +236,7 @@ The assignment mentions **epsilon_start, epsilon_end, epsilon_decay**. In Stable
 
 ## Policy Architecture Decision: MLP vs CNN
 
-### CNNPolicy (Convolutional Neural Network) ✅ **RECOMMENDED**
+### CNNPolicy (Convolutional Neural Network) **RECOMMENDED**
 
 - **Use for**: Image-based Atari games like Pong
 - **Advantage**: Learns spatial features (edges, objects, patterns)
@@ -240,7 +250,11 @@ The assignment mentions **epsilon_start, epsilon_end, epsilon_decay**. In Stable
 - **Disadvantage**: Treats pixel input as flat vector - loses spatial information
 - **Performance**: Typically underperforms on image-based games
 
+<<<<<<< HEAD
 **For Pong**: Use CNNPolicy for the agent to learn optimal paddle control!
+=======
+**For Pong**: Use CNNPolicy for the agent to learn visual navigation skills!
+>>>>>>> 8aa255de7332feac4c7bb10059f4e0fd9974eff5
 
 ## Lessons Learned
 
@@ -249,18 +263,9 @@ The assignment mentions **epsilon_start, epsilon_end, epsilon_decay**. In Stable
 3. **Hyperparameter Sensitivity**:
 4. **CNN Advantage**:
 
-## Presentation Details
-
-- **Duration**: 10 minutes (2 min per member + 4 min gameplay)
-- **Date**: [To be scheduled - Week 6]
-- **Cameras**: MUST remain ON for entire presentation
-- **Format**:
-  - 2 minutes per member on experiments and insights
-  - Group gameplay demo
-  - Q&A session
-
 ### Recording Gameplay Video (for presentation)
 
+<<<<<<< HEAD
 Use `play.py` to record agent performance:
 
 ```bash
@@ -345,26 +350,15 @@ python play.py
 | Group Collaboration & Individual Contribution | 10     |
 | **Total**                                     | **30** |
 
+=======
+link to the video: https://drive.google.com/file/d/19l_ln5XXU7x4S-b8p0kHFiIdjHYLW56O/view?usp=sharing
+
+---
+
+>>>>>>> 8aa255de7332feac4c7bb10059f4e0fd9974eff5
 ## References
 
 - [Stable Baselines3 Documentation](https://stable-baselines3.readthedocs.io/)
 - [Gymnasium Documentation](https://gymnasium.farama.org/)
 - [DQN Paper](https://arxiv.org/abs/1312.5602)
 - [Atari Games](https://gymnasium.farama.org/environments/atari/)
-
-## Submission Checklist
-
-- [ ] Experiment 1-10 (Yvette) - Complete
-- [ ] Experiment 1-10 (Mariam) - Complete
-- [ ] Experiment 1-10 (Dennis) - Complete
-- [ ] Results Table Filled - Empty cells populated
-- [ ] Gameplay Video - Recorded from play.py
-- [ ] README Updated - With all results
-- [ ] GitHub Repository - All files pushed
-- [ ] Coach Slot - Booked for Week 6
-- [ ] zip file or URL - Ready for submission
-
----
-
-**Last Updated**: March 16, 2026
-**Status**: In Progress - Awaiting member experiments

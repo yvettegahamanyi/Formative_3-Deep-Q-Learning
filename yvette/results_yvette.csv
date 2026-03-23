@@ -1,0 +1,15 @@
+Experiment,LR,γ,Batch,Buffer,ε_end,Mean Reward,Max Reward,Mean Ep. Length,Behavior / Notes
+Baseline,1e-4,0.99,32,50k,0.05,-15.52,7.00,2613,"Reference. Agent slowly improves, learns to rally but rarely scores."
+Exp1: Higher LR,5e-4,0.99,32,50k,0.05,-20.96,-18.00,781,"Too fast — unstable Q-values, episodes collapse to minimum length, no learning."
+Exp2: Very High LR,1e-3,0.99,32,50k,0.05,-20.96,-18.00,780,Same collapse as Exp1. LR=1e-3 diverges immediately for Atari DQN.
+Exp3: High LR + Large Buf,5e-4,0.99,32,100k,0.05,-20.95,-18.00,781,Large buffer did not rescue high LR — still diverges. Buffer helps only with stable LR.
+Exp4: Higher Gamma,1e-4,0.995,32,50k,0.05,-15.22,1.00,2553,"Slightly better than baseline. Agent values long-term rewards, episodes stay long."
+Exp5: Very High Gamma,1e-4,0.999,32,50k,0.05,-14.77,15.00,2192,Best max reward (15). Agent plans far ahead; high variance but capable of winning games.
+Exp6: High Gamma + High LR,5e-4,0.995,32,50k,0.05,-20.95,-19.00,781,High LR cancels gamma benefit — same divergence pattern as Exp1/Exp2.
+Exp7: Large Batch,1e-4,0.99,64,50k,0.05,-14.25,10.00,2353,"Stable improvement over baseline. Smoother gradient estimates, longer episodes."
+Exp8: Very Large Batch,1e-4,0.99,128,50k,0.05,-12.07,11.00,2755,BEST mean reward overall. Large batch + default LR = most stable learning signal.
+Exp9: High Exploration,1e-4,0.99,32,50k,0.1,-15.56,3.00,2099,More exploration hurt exploitation. Agent keeps trying random moves late in training.
+Exp10: Combined Optimal,5e-4,0.995,64,100k,0.1,-20.93,-18.00,789,High LR again dominates negatively — all other improvements nullified.
+Exp11: COH Small Buffer,1e-4,0.999,128,50k,0.1,-14.39,8.00,2348,Good combo but small buffer limits diversity. Slightly worse than Exp12.
+Exp12: COH Large Buffer,1e-4,0.999,128,100k,0.1,-14.09,7.00,2453,Larger buffer + gamma=0.999 + batch=128 stable but max reward lower than Exp5.
+Exp13: COH Large Buffer,1e-4,0.999,128,200k,0.05,-13.96,15.00,2570,THE BEST MODEL
