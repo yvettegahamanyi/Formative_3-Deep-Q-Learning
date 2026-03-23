@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # Formative 3: Deep Q-Learning (DQN) - Pong Atari
-=======
-# Formative 3: Deep Q-Learning (DQN) - Pong
->>>>>>> 8aa255de7332feac4c7bb10059f4e0fd9974eff5
 
 ## Team Members:
 
@@ -18,11 +14,7 @@ This project implements a Deep Q-Network (DQN) agent trained on the **Pong** Ata
 
 - **Game**: Pong-v5 (ALE/Pong-v5)
 - **Agent Type**: DQN with CNNPolicy
-<<<<<<< HEAD
-- **Objective**: Play Pong without losing (maximize score)
-=======
-- **Objective**: Shoot ball back
->>>>>>> 8aa255de7332feac4c7bb10059f4e0fd9974eff5
+- **Objective**: Play Pong without losing (maximize score) Shoot ball
 
 ## Project Structure
 
@@ -127,10 +119,10 @@ Each member conducted 10 experiments varying:
 
 #### Most Impactful Hyperparameter Changes:
 
-- **Learning Rate**: [To be filled]
-- **Gamma**: [To be filled]
-- **Batch Size**: [To be filled]
-- **Exploration (Epsilon)**: [To be filled]
+- **Learning Rate**: [1e-5, 5e-5, 1e-4, 5e-4, 1e-3]
+- **Gamma**: [0.90, 0.95, 0.99, 0.995]
+- **Batch Size**: [16, 32, 64, 128]
+- **Exploration (Epsilon)**: [0.001, 0.01, 0.05, 0.1]
 
 #### Best Configuration Per Member:
 
@@ -142,14 +134,8 @@ Each member conducted 10 experiments varying:
 
 ### Baseline Model Performance:
 
-- Training Configuration: CNNPolicy, lr=1e-4, gamma=0.99, batch_size=32
+- Training Configuration: CNNPolicy, lr=1e-4, -gamma=0.99, batch_size=32
 - Final Average Reward: [To be filled]
-
-### Best Performing Model:
-
-- Configuration: [To be filled after experiments]
-- Average Reward: [To be filled]
-- Gameplay Video: [Link to video recording]
 
 ## Technical Stack
 
@@ -250,11 +236,7 @@ The assignment mentions **epsilon_start, epsilon_end, epsilon_decay**. In Stable
 - **Disadvantage**: Treats pixel input as flat vector - loses spatial information
 - **Performance**: Typically underperforms on image-based games
 
-<<<<<<< HEAD
-**For Pong**: Use CNNPolicy for the agent to learn optimal paddle control!
-=======
-**For Pong**: Use CNNPolicy for the agent to learn visual navigation skills!
->>>>>>> 8aa255de7332feac4c7bb10059f4e0fd9974eff5
+**For Pong**: Use CNNPolicy for the agent to learn optimal paddle control! and Use CNNPolicy for the agent to learn visual navigation skills!
 
 ## Lessons Learned
 
@@ -265,7 +247,6 @@ The assignment mentions **epsilon_start, epsilon_end, epsilon_decay**. In Stable
 
 ### Recording Gameplay Video (for presentation)
 
-<<<<<<< HEAD
 Use `play.py` to record agent performance:
 
 ```bash
@@ -298,64 +279,8 @@ python play.py
 - Reward accumulation per episode
 - Duration: 30-60 seconds recommended
 
----
-
-### Group Presentation Q&A Preparation
-
-**Key Topics All Members Must Be Ready to Answer:**
-
-#### 1. Understanding of DQN/RL Concepts
-
-- **Q**: What is the exploration-exploration trade-off?
-  - **A**: Balance between trying new actions (explore) vs using best known actions (exploit)
-- **Q**: Why does gamma matter?
-  - **A**: Higher gamma values future rewards more; lower gamma focuses on immediate rewards
-- **Q**: What is the reward structure in Pong?
-  - **A**: In Pong, the agent gets +1 for winning a point and -1 for losing a point; objective is to maximize score
-- **Q**: How does the DQN agent learn?
-  - **A**: Uses experience replay and target networks to learn Q-values from trial-and-error
-
-#### 2. Hyperparameter Tuning Trade-offs
-
-- **Q**: Why did you choose higher/lower/average parameters?
-  - **A**: To test different learning speeds and stability levels
-- **Q**: What trade-off did you observe?
-  - **A**: Higher LR = faster learning but potential instability; Lower LR = stable but slow
-- **Q**: Which parameter had the biggest impact?
-  - **A**: [To be filled based on experiments]
-
-#### 3. Model Behavior
-
-- **Q**: Why does your final model behave the way it does?
-  - **A**: [Describe learned navigation strategy based on experiments]
-- **Q**: Did the agent learn to explore or exploit more?
-  - **A**: [Based on epsilon_final and rewards collected]
-
-#### 4. Policy Architecture
-
-- **Q**: Why did you choose CNNPolicy over MlpPolicy?
-  - **A**: CNN learns spatial features from pixels; essential for visual navigation task
-- **Q**: What happens if you use MlpPolicy instead?
-  - **A**: Agent treats flattened pixels as independent values - loses spatial information
-
----
-
-## Assessment Rubric (30 points total)
-
-| Criterion                                     | Points |
-| --------------------------------------------- | ------ |
-| Understanding of DQN/RL Concepts              | 10     |
-| Hyperparameter Tuning & Documentation         | 5      |
-| Evaluation & Agent Performance (play.py)      | 5      |
-| Group Collaboration & Individual Contribution | 10     |
-| **Total**                                     | **30** |
-
-=======
 link to the video: https://drive.google.com/file/d/19l_ln5XXU7x4S-b8p0kHFiIdjHYLW56O/view?usp=sharing
 
----
-
->>>>>>> 8aa255de7332feac4c7bb10059f4e0fd9974eff5
 ## References
 
 - [Stable Baselines3 Documentation](https://stable-baselines3.readthedocs.io/)
