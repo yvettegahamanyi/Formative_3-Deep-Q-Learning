@@ -9,8 +9,8 @@ from stable_baselines3.common.vec_env import VecFrameStack
 gym.register_envs(ale_py)
 
 
-def play_private_eye(
-    model_path: str = "dqn_model",
+def play_pong(
+    model_path: str = "yvette_best_model",
     num_episodes: int = 5,
     render: bool = True,
     full_action_space_mode: str = "auto",
@@ -131,3 +131,5 @@ if __name__ == "__main__":
         render=not args.no_render,
         full_action_space_mode=args.full_action_space,
     )
+    
+    

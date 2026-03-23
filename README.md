@@ -281,7 +281,7 @@ python play.py
 
 link to the video: https://drive.google.com/file/d/19l_ln5XXU7x4S-b8p0kHFiIdjHYLW56O/view?usp=sharing
 
-## References
+### References
 
 - [Stable Baselines3 Documentation](https://stable-baselines3.readthedocs.io/)
 - [Gymnasium Documentation](https://gymnasium.farama.org/)

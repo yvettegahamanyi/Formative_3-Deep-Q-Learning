@@ -35,7 +35,7 @@ def patched_get_system_info(print_info=True):
 
 sb3_utils.get_system_info = patched_get_system_info
 
-
+## Environment ID for Pong
 ENV_ID = "ALE/Pong-v5"
 
 

@@ -1,5 +1,5 @@
 """
-Shared utilities for DQN training experiments on Pong.
+Shared utilities for DQN training experiments on Pong environment, including environment creation, evaluation, and model management.
 """
 
 import os
