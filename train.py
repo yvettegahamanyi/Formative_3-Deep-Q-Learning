@@ -35,11 +35,11 @@ def patched_get_system_info(print_info=True):
 
 sb3_utils.get_system_info = patched_get_system_info
 
-
+## Environment ID for Pong
 ENV_ID = "ALE/Pong-v5"
 
 
-def make_env(seed: int = 0, monitor_dir: str | None = None, full_action_space: bool = True):
+def make_env(seed: int = 0, monitor_dir: str | None = None, full_action_space: bool = False):
     env = make_atari_env(
         ENV_ID,
         n_envs=1,
@@ -53,7 +53,7 @@ def make_env(seed: int = 0, monitor_dir: str | None = None, full_action_space: b
     return env
 
 
-def train_private_eye(policy_type="CnnPolicy", total_timesteps=700000, seed: int = 0):
+def train_pong(policy_type="CnnPolicy", total_timesteps=700000, seed: int = 0):
     """
     Train a DQN agent on Pong environment.
     
@@ -177,7 +177,7 @@ if __name__ == "__main__":
         print("\n" + "="*70)
         print("DQN POLICY COMPARISON: CNN vs MLP")
         print("="*70)
-        train_private_eye(policy_type="CnnPolicy", total_timesteps=args.timesteps, seed=args.seed)
-        train_private_eye(policy_type="MlpPolicy", total_timesteps=args.timesteps, seed=args.seed)
+        train_pong(policy_type="CnnPolicy", total_timesteps=args.timesteps, seed=args.seed)
+        train_pong(policy_type="MlpPolicy", total_timesteps=args.timesteps, seed=args.seed)
     else:
-        train_private_eye(policy_type=args.policy, total_timesteps=args.timesteps, seed=args.seed)
+        train_pong(policy_type=args.policy, total_timesteps=args.timesteps, seed=args.seed)

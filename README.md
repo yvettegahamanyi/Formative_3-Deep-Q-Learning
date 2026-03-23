@@ -1,4 +1,4 @@
-# Formative 3: Deep Q-Learning (DQN) - Pong
+# Formative 3: Deep Q-Learning (DQN) - Pong Atari
 
 ## Team Members:
 
@@ -14,7 +14,7 @@ This project implements a Deep Q-Network (DQN) agent trained on the **Pong** Ata
 
 - **Game**: Pong-v5 (ALE/Pong-v5)
 - **Agent Type**: DQN with CNNPolicy
-- **Objective**: Shoot ball back
+- **Objective**: Play Pong without losing (maximize score) Shoot ball
 
 ## Project Structure
 
@@ -119,10 +119,10 @@ Each member conducted 10 experiments varying:
 
 #### Most Impactful Hyperparameter Changes:
 
-- **Learning Rate**: [To be filled]
-- **Gamma**: [To be filled]
-- **Batch Size**: [To be filled]
-- **Exploration (Epsilon)**: [To be filled]
+- **Learning Rate**: [1e-5, 5e-5, 1e-4, 5e-4, 1e-3]
+- **Gamma**: [0.90, 0.95, 0.99, 0.995]
+- **Batch Size**: [16, 32, 64, 128]
+- **Exploration (Epsilon)**: [0.001, 0.01, 0.05, 0.1]
 
 #### Best Configuration Per Member:
 
@@ -134,14 +134,8 @@ Each member conducted 10 experiments varying:
 
 ### Baseline Model Performance:
 
-- Training Configuration: CNNPolicy, lr=1e-4, gamma=0.99, batch_size=32
+- Training Configuration: CNNPolicy, lr=1e-4, -gamma=0.99, batch_size=32
 - Final Average Reward: [To be filled]
-
-### Best Performing Model:
-
-- Configuration: [To be filled after experiments]
-- Average Reward: [To be filled]
-- Gameplay Video: [Link to video recording]
 
 ## Technical Stack
 
@@ -242,7 +236,7 @@ The assignment mentions **epsilon_start, epsilon_end, epsilon_decay**. In Stable
 - **Disadvantage**: Treats pixel input as flat vector - loses spatial information
 - **Performance**: Typically underperforms on image-based games
 
-**For Pong**: Use CNNPolicy for the agent to learn visual navigation skills!
+**For Pong**: Use CNNPolicy for the agent to learn optimal paddle control! and Use CNNPolicy for the agent to learn visual navigation skills!
 
 ## Lessons Learned
 
@@ -253,11 +247,41 @@ The assignment mentions **epsilon_start, epsilon_end, epsilon_decay**. In Stable
 
 ### Recording Gameplay Video (for presentation)
 
+Use `play.py` to record agent performance:
+
+```bash
+# Run play.py and record screen output
+python play.py
+```
+
+**Recording Options:**
+
+1. **OBS Studio** (Free)
+   - Open Broadcaster Software - record screen while play.py runs
+   - Output as MP4 for submission
+
+2. **Screen Capture (Windows)**
+
+   ```powershell
+   # Built-in Windows recording
+   # Press Win + G to open game bar
+   # Press Win + Alt + R to start recording
+   ```
+
+3. **Python with cv2**
+   - Modify play.py to save video frames directly
+   - (Optional for advanced implementation)
+
+**What to capture:**
+
+- Agent playing Pong
+- Multiple episodes showing learned behavior
+- Reward accumulation per episode
+- Duration: 30-60 seconds recommended
+
 link to the video: https://drive.google.com/file/d/19l_ln5XXU7x4S-b8p0kHFiIdjHYLW56O/view?usp=sharing
 
----
-
-## References
+### References
 
 - [Stable Baselines3 Documentation](https://stable-baselines3.readthedocs.io/)
 - [Gymnasium Documentation](https://gymnasium.farama.org/)
