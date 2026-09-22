@@ -7,6 +7,8 @@ Outputs (inside this folder):
 - best_mariam_model.zip
 """
 
+import utils.transport
+import utils.session
 import os
 import argparse
 import sys
